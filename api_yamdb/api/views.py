@@ -142,11 +142,15 @@ class CommentViewSet(ModelViewSet):
         review = get_object_or_404(Review, id=self.kwargs.get("review_id"))
         serializer.save(author=self.request.user, review=review)
 
+
 class TitleViewSet(viewsets.ModelViewSet):
     """Вьюсет для произведения."""
+
     queryset = Title.objects.all()
     # serializer_class = TitleSerializer
-    permission_classes = [IsAdminOrReadOnly, ]
+    permission_classes = [
+        IsAdminOrReadOnly,
+    ]
 
     def get_serializer_class(self):
         pass
@@ -157,17 +161,26 @@ class TitleViewSet(viewsets.ModelViewSet):
 
 class CategoryViewSet(GetListCreateDeleteMixin):
     """Вьюсет для категории."""
+
     queryset = Category.objects.all()
     # serializer_class = CategorySerializer
-    permission_classes = [IsAdminOrReadOnly, ]
-    search_fields = ('name', 'slug',)
-    lookup_field = 'slug'
+    permission_classes = [
+        IsAdminOrReadOnly,
+    ]
+    search_fields = (
+        "name",
+        "slug",
+    )
+    lookup_field = "slug"
 
 
 class GenreViewSet(GetListCreateDeleteMixin):
     """Вьюсет для жанра."""
+
     queryset = Genre.objects.all()
-    #serializer_class = GenreSerializer
-    permission_classes = [IsAdminOrReadOnly, ]
-    search_fields = ('name', 'slug')
-    lookup_field = 'slug'
+    # serializer_class = GenreSerializer
+    permission_classes = [
+        IsAdminOrReadOnly,
+    ]
+    search_fields = ("name", "slug")
+    lookup_field = "slug"
